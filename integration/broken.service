@@ -1,0 +1,6 @@
+[Unit]
+Description=Oneshot service that always fails (certbot-like)
+
+[Service]
+Type=oneshot
+ExecStart=/bin/false
