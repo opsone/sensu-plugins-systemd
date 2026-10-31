@@ -26,7 +26,7 @@ check-systemd [flags]
       --timeout int       D-Bus timeout in seconds (default 10)
 ```
 
-Every option can also be set with an environment variable (`CHECK_SYSTEMD_UNITS`, `CHECK_SYSTEMD_EXCLUDE`, `CHECK_SYSTEMD_TYPES`, `CHECK_SYSTEMD_TIMEOUT`) or an entity annotation `sensu.io/plugins/check-systemd/config/<option>`.
+Every option can also be set with an environment variable (`CHECK_SYSTEMD_UNITS`, `CHECK_SYSTEMD_EXCLUDE`, `CHECK_SYSTEMD_TYPES`, `CHECK_SYSTEMD_TIMEOUT`). Per-host settings go through Sensu token substitution (see below).
 
 Examples:
 
@@ -54,13 +54,23 @@ api_version: core/v2
 metadata:
   name: check-systemd
 spec:
-  command: check-systemd -e 'user@*.service'
+  command: >-
+    check-systemd -e 'user@*.service'
+    {{ .annotations.check_systemd_args | default "" }}
   runtime_assets:
     - opsone/sensu-plugins-systemd
   interval: 300
+  timeout: 30
   publish: true
   subscriptions:
     - linux
+```
+
+Per-host extra arguments are set as an entity annotation, e.g. in the agent configuration:
+
+```yaml
+annotations:
+  check_systemd_args: "-u nginx.service -u fail2ban.service -u certbot.timer"
 ```
 
 The Sensu agent does not need to run as root: reading unit states over the system bus is allowed to unprivileged users.
