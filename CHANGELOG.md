@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.1.0] - 2026-10-31
 
 ### Added
 - CRITICAL alert on any systemd unit in `failed` state, WARNING on a unit stuck in a restart loop (`auto-restart`).
