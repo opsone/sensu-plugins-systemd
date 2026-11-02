@@ -92,7 +92,7 @@ sensuctl create -f dist/opsone-sensu-plugins-systemd_0.1.0.yml
 
 `make release` runs `make dist`, which runs the tests then produces in `dist/`:
 
-- one archive per architecture (`linux/amd64`, `linux/arm64`) in Sensu asset layout (`bin/check-systemd`);
+- one `linux/amd64` archive in Sensu asset layout (`bin/check-systemd`);
 - the sha512 checksums file;
 - `opsone-sensu-plugins-systemd_<version>.yml`, the asset definition pointing to the GitHub release of the tag.
 

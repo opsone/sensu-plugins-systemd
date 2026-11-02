@@ -3,7 +3,7 @@ PROJECT := sensu-plugins-systemd
 VERSION ?= $(patsubst v%,%,$(shell git describe --tags --always 2>/dev/null || echo dev))
 COMMIT  := $(shell git rev-parse --short HEAD 2>/dev/null || echo none)
 DATE    := $(shell date -u +%Y-%m-%dT%H:%M:%SZ)
-ARCHS   := amd64 arm64
+ARCHS   := amd64
 REPO    := opsone/sensu-plugins-systemd
 ASSET_YML := dist/$(subst /,-,$(REPO))_$(VERSION).yml
 
